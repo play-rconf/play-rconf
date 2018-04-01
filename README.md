@@ -18,10 +18,11 @@ configuration with a Play Framework application.
 
 ## Available providers
 
-| Provider    | Classpath                          | Repository                 |
-|-------------|------------------------------------|----------------------------|
-| CoreOS etcd | io.playrconf.provider.EtcdProvider | [play-rconf/play-rconf-etcd](https://github.com/play-rconf/play-rconf-etcd) |
-| HTTP        | io.playrconf.provider.HttpProvider | [play-rconf/play-rconf-http](https://github.com/play-rconf/play-rconf-http) |
+| Provider         | Classpath                            | Repository                 |
+|------------------|--------------------------------------|----------------------------|
+| CoreOS etcd      | io.playrconf.provider.EtcdProvider   | [play-rconf/play-rconf-etcd](https://github.com/play-rconf/play-rconf-etcd) |
+| HashiCorp Consul | io.playrconf.provider.ConsulProvider | [play-rconf/play-rconf-consul](https://github.com/play-rconf/play-rconf-consul) |
+| HTTP             | io.playrconf.provider.HttpProvider   | [play-rconf/play-rconf-http](https://github.com/play-rconf/play-rconf-http) |
 
 
 
