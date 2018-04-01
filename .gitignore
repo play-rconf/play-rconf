@@ -1,0 +1,31 @@
+*.class
+*.java~
+
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+
+# Other IDE
+.classpath
+.project
+.settings
+
+
+# Package Files #
+*.jar
+target/
+/test
+
+
+# MacOS / Windows
+.DS_Store
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+*.lnk
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
