@@ -1,10 +1,25 @@
 name := "play-rconf"
 
 
+version := "18.04"
+
+
+homepage := Some(url("https://github.com/play-rconf/play-rconf"))
+
+
+description := "Remote configuration for Play Framework"
+
+
+startYear := Some(2018)
+
+
+licenses += "MIT" -> url("https://raw.githubusercontent.com/play-rconf/play-rconf/master/LICENSE")
+
+
 organization := "io.play-rconf"
 
 
-version := "18.04"
+organizationHomepage := Some(url("https://github.com/play-rconf"))
 
 
 scalaVersion := "2.12.5"
