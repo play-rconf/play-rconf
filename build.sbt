@@ -25,16 +25,27 @@ organizationHomepage := Some(url("https://github.com/play-rconf"))
 scalaVersion := "2.12.5"
 
 
-scalacOptions in ThisBuild ++= Seq(
-  "-deprecation",
-  "-unchecked"
-)
-
-
 resolvers += "jitpack" at "https://jitpack.io"
 
 
 libraryDependencies ++= Seq(
   "com.github.play-rconf" % "play-rconf-sdk" % "release~18.04u3",
   "com.typesafe.play" %% "play-guice" % "2.6.12"
+)
+
+
+scalacOptions in ThisBuild ++= Seq(
+  "-deprecation",
+  "-unchecked"
+)
+
+
+javacOptions in ThisBuild ++= Seq(
+  "-Xlint:cast",
+  "-Xlint:deprecation",
+  "-Xlint:divzero",
+  "-Xlint:empty",
+  "-Xlint:fallthrough",
+  "-Xlint:finally",
+  "-Xlint:unchecked"
 )
