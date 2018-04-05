@@ -33,6 +33,7 @@ import play.inject.guice.GuiceApplicationLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * Extends the default application loader to inject the
@@ -61,21 +62,33 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
             switch (localConfiguration.getValue(BASE_REMOTE_CONF_KEY + "providers").valueType()) {
                 case LIST: {
                     providerClassPaths.addAll(
-                        localConfiguration.getStringList(BASE_REMOTE_CONF_KEY + "providers")
+                        localConfiguration
+                            .getStringList(BASE_REMOTE_CONF_KEY + "providers")
+                            .stream()
+                            .map(String::trim)
+                            .filter(cp -> !cp.isEmpty())
+                            .collect(Collectors.toList())
                     );
                     break;
                 }
                 case STRING: {
-                    providerClassPaths.add(
-                        localConfiguration.getString(BASE_REMOTE_CONF_KEY + "providers")
-                    );
+                    final String cleanedClassPath = localConfiguration
+                        .getString(BASE_REMOTE_CONF_KEY + "providers")
+                        .trim();
+                    if (!cleanedClassPath.isEmpty()) {
+                        providerClassPaths.add(cleanedClassPath);
+                    }
                     break;
                 }
             }
-        } else if (localConfiguration.hasPath(BASE_REMOTE_CONF_KEY + "provider")) {
-            providerClassPaths.add(
-                localConfiguration.getString(BASE_REMOTE_CONF_KEY + "provider")
-            );
+        }
+        if (localConfiguration.hasPath(BASE_REMOTE_CONF_KEY + "provider")) {
+            final String cleanedClassPath = localConfiguration
+                .getString(BASE_REMOTE_CONF_KEY + "provider")
+                .trim();
+            if (!cleanedClassPath.isEmpty()) {
+                providerClassPaths.add(cleanedClassPath);
+            }
         }
         if (!providerClassPaths.isEmpty()) {
             final StringBuilder sb = new StringBuilder(512);

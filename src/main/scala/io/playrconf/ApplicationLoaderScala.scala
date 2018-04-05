@@ -29,6 +29,7 @@ import com.typesafe.config.{Config, ConfigFactory, ConfigValueType}
 import io.playrconf.sdk.Provider
 import play.api.inject.guice.{GuiceApplicationBuilder, GuiceApplicationLoader}
 import play.api.{Configuration, Logger}
+
 import scala.collection.JavaConverters._
 
 /**
@@ -72,17 +73,30 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
     if (localConfiguration.hasPath(BASE_REMOTE_CONF_KEY + "providers")) {
       localConfiguration.getValue(BASE_REMOTE_CONF_KEY + "providers").valueType() match {
         case ConfigValueType.LIST =>
-          providerClassPaths ++= localConfiguration.getStringList(BASE_REMOTE_CONF_KEY + "providers").asScala
+          providerClassPaths ++= localConfiguration
+            .getStringList(BASE_REMOTE_CONF_KEY + "providers")
+            .asScala
+            .toStream
+            .map(_.trim)
+            .filter(_.nonEmpty)
+            .toList
         case ConfigValueType.STRING =>
-          providerClassPaths ++= List(
-            localConfiguration.getString(BASE_REMOTE_CONF_KEY + "providers")
-          )
+          val cleanedClassPath: String = localConfiguration
+            .getString(BASE_REMOTE_CONF_KEY + "providers")
+            .trim
+          if (cleanedClassPath.nonEmpty) {
+            providerClassPaths ++= List(cleanedClassPath)
+          }
         case _ => None
       }
-    } else if (localConfiguration.hasPath(BASE_REMOTE_CONF_KEY + "provider")) {
-      providerClassPaths ++= List(
-        localConfiguration.getString(BASE_REMOTE_CONF_KEY + "provider")
-      )
+    }
+    if (localConfiguration.hasPath(BASE_REMOTE_CONF_KEY + "provider")) {
+      val cleanedClassPath: String = localConfiguration
+        .getString(BASE_REMOTE_CONF_KEY + "provider")
+        .trim
+      if (cleanedClassPath.nonEmpty) {
+        providerClassPaths ++= List(cleanedClassPath)
+      }
     }
 
     if (providerClassPaths.nonEmpty) {
