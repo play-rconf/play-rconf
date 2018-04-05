@@ -95,10 +95,16 @@ remote-configuration {
   # Providers to use. If you specify more than one, they will all
   # be used one after the other. The variable could be a single
   # string or a list of string containing the classpath of all
-  # providers to use.
+  # providers to use
   providers = [
   ]
   providers = ${?REMOTECONF_PROVIDERS}
+
+  # Alternative way to specify the provider to use. The variable
+  # must be a single string containing the classpath of the provider
+  # to use
+  provider = ""
+  provider = ${?REMOTECONF_PROVIDER}
 }
 ```
 
