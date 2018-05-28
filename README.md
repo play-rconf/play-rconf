@@ -1,7 +1,7 @@
 # Play Remote Configuration
 
 
-[![Latest release](https://img.shields.io/badge/latest_release-18.04-orange.svg)](https://github.com/play-rconf/play-rconf/releases)
+[![Latest release](https://img.shields.io/badge/latest_release-18.05-orange.svg)](https://github.com/play-rconf/play-rconf/releases)
 [![JitPack](https://jitpack.io/v/play-rconf/play-rconf.svg)](https://jitpack.io/#play-rconf/play-rconf)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/play-rconf/play-rconf/master/LICENSE)
 

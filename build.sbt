@@ -1,7 +1,7 @@
 name := "play-rconf"
 
 
-version := "18.04"
+version := "18.05"
 
 
 homepage := Some(url("https://github.com/play-rconf/play-rconf"))
@@ -29,7 +29,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 
 
 libraryDependencies ++= Seq(
-  "com.github.play-rconf" % "play-rconf-sdk" % "release~18.04u3",
+  "com.github.play-rconf" % "play-rconf-sdk" % "release~18.05",
   "com.typesafe.play" %% "play-guice" % "2.6.12"
 )
 

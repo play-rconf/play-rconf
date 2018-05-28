@@ -108,6 +108,9 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
                                 kvObj.apply(sb);
                                 keyFetchCount.incrementAndGet();
                                 if (Logger.isDebugEnabled()) {
+                                    if (kvObj.toString().contains("password")) {
+                                        kvObj.setToStringWithMask(true);
+                                    }
                                     Logger.debug("[{}] {}", provider.getName(), kvObj);
                                 }
                             },

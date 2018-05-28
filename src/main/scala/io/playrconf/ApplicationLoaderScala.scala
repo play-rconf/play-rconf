@@ -116,6 +116,9 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
               kvObj => {
                 kvObj.apply(sb)
                 if (Logger.isDebugEnabled) {
+                  if (kvObj.toString.contains("password")) {
+                    kvObj.setToStringWithMask(true)
+                  }
                   Logger.debug(s"[${provider.getName}] $kvObj")
                 }
               },
