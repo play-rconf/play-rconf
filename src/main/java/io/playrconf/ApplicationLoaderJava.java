@@ -27,6 +27,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.playrconf.sdk.Provider;
 import play.Logger;
+import play.LoggerConfigurator;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.inject.guice.GuiceApplicationLoader;
 
@@ -144,8 +145,13 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
 
     @Override
     public GuiceApplicationBuilder builder(final play.ApplicationLoader.Context context) {
-        final Config localConfiguration = context.initialConfig();
+        // Initialize Logger
+        LoggerConfigurator.apply(
+            context.environment().classLoader()
+        ).ifPresent(loggerConfigurator -> loggerConfigurator.configure(context.environment()));
 
+        // Retrieve remote configuration and return builder
+        final Config localConfiguration = context.initialConfig();
         return this.initialBuilder
             .in(context.environment())
             .loadConfig(

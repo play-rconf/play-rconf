@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import com.typesafe.config.{Config, ConfigFactory, ConfigValueType}
 import io.playrconf.sdk.Provider
 import play.api.inject.guice.{GuiceApplicationBuilder, GuiceApplicationLoader}
-import play.api.{Configuration, Logger}
+import play.api.{Configuration, Logger, LoggerConfigurator}
 
 import scala.collection.JavaConverters._
 
@@ -48,8 +48,12 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
   private val BASE_REMOTE_CONF_KEY: String = "remote-configuration."
 
   override protected def builder(context: play.api.ApplicationLoader.Context): GuiceApplicationBuilder = {
-    val localConfiguration: Configuration = context.initialConfiguration
+    // Initialize Logger
+    LoggerConfigurator(context.environment.classLoader)
+      .foreach { _.configure(context.environment) }
 
+    // Retrieve remote configuration and return builder
+    val localConfiguration: Configuration = context.initialConfiguration
     initialBuilder
       .disableCircularProxies()
       .in(context.environment)
