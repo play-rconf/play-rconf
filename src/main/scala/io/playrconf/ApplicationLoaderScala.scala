@@ -47,6 +47,11 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
     */
   private val BASE_REMOTE_CONF_KEY: String = "remote-configuration."
 
+  /**
+    * Logger.
+    */
+  private val LOGGER: Logger = Logger.apply("play-rconf")
+
   override protected def builder(context: play.api.ApplicationLoader.Context): GuiceApplicationBuilder = {
     // Initialize Logger
     LoggerConfigurator(context.environment.classLoader)
@@ -119,33 +124,33 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
               localConfiguration.getConfig(BASE_REMOTE_CONF_KEY + provider.getConfigurationObjectName),
               kvObj => {
                 kvObj.apply(sb)
-                if (Logger.isDebugEnabled) {
+                if (LOGGER.isDebugEnabled) {
                   if (kvObj.toString.contains("password")) {
                     kvObj.setToStringWithMask(true)
                   }
-                  Logger.debug(s"[${provider.getName}] $kvObj")
+                  LOGGER.debug(s"[${provider.getName}] $kvObj")
                 }
               },
               fileObj => {
                 fileObj.apply()
-                if (Logger.isDebugEnabled) {
-                  Logger.debug(s"[${provider.getName}] $fileObj")
+                if (LOGGER.isDebugEnabled) {
+                  LOGGER.debug(s"[${provider.getName}] $fileObj")
                 }
               }
             )
           }
-          Logger.info(
+          LOGGER.info(
             s"[${provider.getName}] ${keyFetchCount.get} configuration keys fetched and ${storedFileCount.get} files stored"
           )
           keyFetchCount.set(0)
           storedFileCount.set(0)
         } catch {
           case _: ClassNotFoundException =>
-            Logger.error(s"The provider $classPath does not exists")
+            LOGGER.error(s"The provider $classPath does not exists")
           case ex: IllegalAccessException =>
-            Logger.error(s"Can't instantiate the provider $classPath", ex)
+            LOGGER.error(s"Can't instantiate the provider $classPath", ex)
           case ex: InstantiationException =>
-            Logger.error(s"Can't instantiate the provider $classPath", ex)
+            LOGGER.error(s"Can't instantiate the provider $classPath", ex)
         }
       })
       return ConfigFactory.parseString(sb.toString)

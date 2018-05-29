@@ -52,6 +52,11 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
     private static final String BASE_REMOTE_CONF_KEY = "remote-configuration.";
 
     /**
+     * Logger.
+     */
+    private static final Logger.ALogger LOGGER = Logger.of("play-rconf");
+
+    /**
      * Iterate over all declared providers.
      *
      * @param localConfiguration The local configuration
@@ -108,23 +113,23 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
                             kvObj -> {
                                 kvObj.apply(sb);
                                 keyFetchCount.incrementAndGet();
-                                if (Logger.isDebugEnabled()) {
+                                if (LOGGER.isDebugEnabled()) {
                                     if (kvObj.toString().contains("password")) {
                                         kvObj.setToStringWithMask(true);
                                     }
-                                    Logger.debug("[{}] {}", provider.getName(), kvObj);
+                                    LOGGER.debug("[{}] {}", provider.getName(), kvObj);
                                 }
                             },
                             fileObj -> {
                                 fileObj.apply();
                                 storedFileCount.incrementAndGet();
-                                if (Logger.isDebugEnabled()) {
-                                    Logger.debug("[{}] Store {}", provider.getName(), fileObj);
+                                if (LOGGER.isDebugEnabled()) {
+                                    LOGGER.debug("[{}] Store {}", provider.getName(), fileObj);
                                 }
                             }
                         );
                     }
-                    Logger.info(
+                    LOGGER.info(
                         "[{}] {} configuration keys fetched and {} files stored",
                         provider.getName(),
                         keyFetchCount.get(),
@@ -133,9 +138,9 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
                     keyFetchCount.set(0);
                     storedFileCount.set(0);
                 } catch (final IllegalAccessException | InstantiationException ex) {
-                    Logger.error("Can't instantiate the provider {}", classPath, ex);
+                    LOGGER.error("Can't instantiate the provider {}", classPath, ex);
                 } catch (final ClassNotFoundException ignore) {
-                    Logger.error("The provider {} does not exists", classPath);
+                    LOGGER.error("The provider {} does not exists", classPath);
                 }
             });
             return ConfigFactory.parseString(sb.toString());
