@@ -33,6 +33,7 @@ import play.inject.guice.GuiceApplicationLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -114,7 +115,8 @@ public class ApplicationLoaderJava extends GuiceApplicationLoader {
                                 kvObj.apply(sb);
                                 keyFetchCount.incrementAndGet();
                                 if (LOGGER.isDebugEnabled()) {
-                                    if (kvObj.toString().contains("password")) {
+                                    final String objString = kvObj.toString().toLowerCase(Locale.ENGLISH);
+                                    if (objString.contains("password") || objString.contains("secret")) {
                                         kvObj.setToStringWithMask(true);
                                     }
                                     LOGGER.debug("[{}] {}", provider.getName(), kvObj);

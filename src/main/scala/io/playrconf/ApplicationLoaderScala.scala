@@ -23,6 +23,7 @@
  */
 package io.playrconf
 
+import java.util.Locale
 import java.util.concurrent.atomic.AtomicInteger
 
 import com.typesafe.config.{Config, ConfigFactory, ConfigValueType}
@@ -125,7 +126,8 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
               kvObj => {
                 kvObj.apply(sb)
                 if (LOGGER.isDebugEnabled) {
-                  if (kvObj.toString.contains("password")) {
+                  val objString: String = kvObj.toString.toLowerCase(Locale.ENGLISH)
+                  if (objString.contains("password") || objString.contains("secret")) {
                     kvObj.setToStringWithMask(true)
                   }
                   LOGGER.debug(s"[${provider.getName}] $kvObj")
