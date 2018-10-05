@@ -64,9 +64,9 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
       .disableCircularProxies()
       .in(context.environment)
       .loadConfig(
-        Configuration.apply(
+        localConfiguration ++ Configuration.apply(
           this.processAllProviders(localConfiguration.underlying)
-        ) ++ localConfiguration
+        )
       )
       .overrides(overrides(context): _*)
   }
