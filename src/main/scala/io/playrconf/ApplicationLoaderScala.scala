@@ -125,6 +125,7 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
               localConfiguration.getConfig(BASE_REMOTE_CONF_KEY + provider.getConfigurationObjectName),
               kvObj => {
                 kvObj.apply(sb)
+                keyFetchCount.incrementAndGet()
                 if (LOGGER.isDebugEnabled) {
                   val objString: String = kvObj.toString.toLowerCase(Locale.ENGLISH)
                   if (objString.contains("password") || objString.contains("secret")) {
@@ -135,6 +136,7 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
               },
               fileObj => {
                 fileObj.apply()
+                storedFileCount.incrementAndGet()
                 if (LOGGER.isDebugEnabled) {
                   LOGGER.debug(s"[${provider.getName}] $fileObj")
                 }
