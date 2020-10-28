@@ -22,7 +22,7 @@ organization := "io.play-rconf"
 organizationHomepage := Some(url("https://github.com/play-rconf"))
 
 
-scalaVersion := "2.12.5"
+scalaVersion := "2.13.3"
 
 
 resolvers += "jitpack" at "https://jitpack.io"
@@ -30,7 +30,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 
 libraryDependencies ++= Seq(
   "com.github.play-rconf" % "play-rconf-sdk" % "release~18.05",
-  "com.typesafe.play" %% "play-guice" % "2.6.12"
+  "com.typesafe.play" %% "play-guice" % "2.8.3"
 )
 
 
