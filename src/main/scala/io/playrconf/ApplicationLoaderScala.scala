@@ -31,7 +31,7 @@ import io.playrconf.sdk.Provider
 import play.api.inject.guice.{GuiceApplicationBuilder, GuiceApplicationLoader}
 import play.api.{Configuration, Logger, LoggerConfigurator}
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 /**
   * Extends the default application loader to inject the
@@ -64,7 +64,7 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
       .disableCircularProxies()
       .in(context.environment)
       .loadConfig(
-        localConfiguration ++ Configuration.apply(
+        localConfiguration withFallback Configuration.apply(
           this.processAllProviders(localConfiguration.underlying)
         )
       )
@@ -86,7 +86,7 @@ class ApplicationLoaderScala extends GuiceApplicationLoader {
           providerClassPaths ++= localConfiguration
             .getStringList(BASE_REMOTE_CONF_KEY + "providers")
             .asScala
-            .toStream
+            .to(LazyList)
             .map(_.trim)
             .filter(_.nonEmpty)
             .toList

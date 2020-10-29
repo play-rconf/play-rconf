@@ -1,4 +1,7 @@
 language: scala
+scala:
+    - 2.13.3
+
 sudo: false
 
 jdk:
