@@ -1,8 +1,8 @@
 # Play Remote Configuration
 
 
-[![Latest release](https://img.shields.io/badge/latest_release-19.09-orange.svg)](https://github.com/play-rconf/play-rconf/releases)
-[![JitPack](https://img.shields.io/badge/JitPack-release~19.09-brightgreen.svg)](https://jitpack.io/#play-rconf/play-rconf)
+[![Latest release](https://img.shields.io/badge/latest_release-20.10-orange.svg)](https://github.com/play-rconf/play-rconf/releases)
+[![JitPack](https://img.shields.io/badge/JitPack-release~20.10-brightgreen.svg)](https://jitpack.io/#play-rconf/play-rconf)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/play-rconf/play-rconf/master/LICENSE)
 
 Remote configuration for Play Framework
@@ -22,6 +22,7 @@ configuration with a Play Framework application.
 |------------------|----------------------------------------|----------------------------|
 | AWS DynamoDB     | io.playrconf.provider.DynamoDbProvider | [play-rconf/play-rconf-dynamodb](https://github.com/play-rconf/play-rconf-dynamodb) |
 | CoreOS etcd      | io.playrconf.provider.EtcdProvider     | [play-rconf/play-rconf-etcd](https://github.com/play-rconf/play-rconf-etcd) |
+| GIT              | io.playrconf.provider.GitProvider      | [play-rconf/play-rconf-git](https://github.com/play-rconf/play-rconf-git) |
 | HashiCorp Consul | io.playrconf.provider.ConsulProvider   | [play-rconf/play-rconf-consul](https://github.com/play-rconf/play-rconf-consul) |
 | HTTP             | io.playrconf.provider.HttpProvider     | [play-rconf/play-rconf-http](https://github.com/play-rconf/play-rconf-http) |
 | Redis            | io.playrconf.provider.RedisProvider    | [play-rconf/play-rconf-redis](https://github.com/play-rconf/play-rconf-redis) |
