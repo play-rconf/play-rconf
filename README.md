@@ -36,7 +36,7 @@ configuration with a Play Framework application.
 ```sbtshell
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.play-rconf" %% "play-rconf" % "release~YY.MM"
+libraryDependencies += "com.github.play-rconf" % "play-rconf" % "release~YY.MM"
 ```
 
 
