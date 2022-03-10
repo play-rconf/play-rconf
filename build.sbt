@@ -1,7 +1,7 @@
 name := "play-rconf"
 
 
-version := "20.10"
+version := "22.03"
 
 
 homepage := Some(url("https://github.com/play-rconf/play-rconf"))

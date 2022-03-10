@@ -1,8 +1,8 @@
 # Play Remote Configuration
 
 
-[![Latest release](https://img.shields.io/badge/latest_release-20.10-orange.svg)](https://github.com/play-rconf/play-rconf/releases)
-[![JitPack](https://img.shields.io/badge/JitPack-release~20.10-brightgreen.svg)](https://jitpack.io/#play-rconf/play-rconf)
+[![Latest release](https://img.shields.io/badge/latest_release-22.03-orange.svg)](https://github.com/play-rconf/play-rconf/releases)
+[![JitPack](https://img.shields.io/badge/JitPack-release~22.03-brightgreen.svg)](https://jitpack.io/#play-rconf/play-rconf)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/play-rconf/play-rconf/master/LICENSE)
 
 Remote configuration for Play Framework
